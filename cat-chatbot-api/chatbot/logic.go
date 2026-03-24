@@ -33,6 +33,7 @@ func GetBotReply(text string) ChatResponse {
     if strings.Contains(t, "scan meow") || strings.Contains(t, "scan moew") || strings.Contains(t, "สแกนแมว") {
         return ChatResponse{
             Reply: "เมี้ยว~ เปิดโหมด Meow Size แล้ว! 📸 → 🤖 → 📊 วิเคราะห์ไซส์ให้เรียบร้อย!",
+            Action: "scan",
         }
     }
 

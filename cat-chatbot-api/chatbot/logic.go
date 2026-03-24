@@ -7,8 +7,9 @@ type ChatResponse struct {
 	Action string `json:"action,omitempty"`
 }
 
+
 func GetBotReply(text string) ChatResponse {
-    t := strings.ToLower(text)
+    t := strings.ToLower(strings.TrimSpace(text))
 
     if strings.Contains(t, "dance") || strings.Contains(t, "เต้น") {
         return ChatResponse{
@@ -17,7 +18,8 @@ func GetBotReply(text string) ChatResponse {
         }
     }
 
-    if strings.Contains(t, "สวัสดี") || strings.Contains(t, "hello") || strings.Contains(t, "hi") {
+    if strings.Contains(t, "สวัสดี") || strings.Contains(t, "hello") ||
+        t == "hi" || strings.HasPrefix(t, "hi ") || strings.HasSuffix(t, " hi") {
         return ChatResponse{
             Reply: "สวัสดี~ เมี้ยว! ยินดีที่ได้รู้จักนะ 😸✨",
         }
@@ -29,10 +31,10 @@ func GetBotReply(text string) ChatResponse {
         }
     }
 
-    // ❗ เอา "hi" ออก ไม่งั้นชนกับ greeting
-    if strings.Contains(t, "scan meow") || strings.Contains(t, "scan moew") || strings.Contains(t, "สแกนแมว") {
+    if strings.Contains(t, "scan meow") || strings.Contains(t, "scan moew") ||
+        strings.Contains(t, "สแกนแมว") || strings.Contains(t, "scan") {
         return ChatResponse{
-            Reply: "เมี้ยว~ เปิดโหมด Meow Size แล้ว! 📸 → 🤖 → 📊 วิเคราะห์ไซส์ให้เรียบร้อย!",
+            Reply:  "เมี้ยว~ เปิดโหมด Meow Size แล้ว! 📸 → 🤖 → 📊 วิเคราะห์ไซส์ให้เรียบร้อย!",
             Action: "scan",
         }
     }
@@ -53,7 +55,7 @@ func GetBotReply(text string) ChatResponse {
 
     if strings.Contains(t, "cmd") || strings.Contains(t, "command") || strings.Contains(t, "ช่วย") {
         return ChatResponse{
-            Reply: "(Command)\n🐾 dance\n👕 outfit\n👋 hello\n🎮 8bit\n💕 love",
+            Reply:  "🐾 dance — ให้ Maffin เต้น\n👕 outfit — ดูชุด\n👋 hello — ทักทาย\n🎮 8bit — แปลงร่าง\n💕 love — ส่งความรัก",
             Action: "command",
         }
     }
